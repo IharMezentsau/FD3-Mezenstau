@@ -1,0 +1,12 @@
+#container .Div .Ul {
+    height: 100px;
+    width: 60ch;
+
+    margin-left: -5ch;
+
+    overflow-y: scroll;
+}
+
+#container .Div .Ul .LiData {
+    list-style-type: none;
+}

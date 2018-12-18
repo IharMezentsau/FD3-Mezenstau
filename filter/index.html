@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>filter</title>
+</head>
+<body>
+<div id="container"></div>
+
+<script src="https://unpkg.com/react@15/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15/dist/react-dom.js"></script>
+
+<script src="Filter.js"></script>
+<link rel="stylesheet" type="text/css" href="Filter.css" />
+
+<script>
+
+    let arrayWords = [
+        {text: 'Тетрагидропиранилциклопентилтетрагидропиридопиридиновые', code: 1},
+        {text: 'Гидразинокарбонилметилбромфенилдигидробенздиазепин', code: 2},
+        {text: 'Кокамидопропилпропиленгликольдимонийхлоридфосфат', code: 3},
+        {text: 'метоксихлордиэтиламинометилбутиламиноакридин', code: 4},
+        {text: 'четырёхсотпятидесятисемимиллиметровое', code: 5},
+        {text: 'превысокомногорассмотрительствующий', code: 6},
+        {text: 'рентгеноэлектрокардиографического', code: 7},
+        {text: 'тифлосурдоолигофренопедагогика', code: 8},
+        {text: 'фиброэзофагогастродуоденоскопия', code: 9},
+        {text: 'водогрязеторфопарафинолечение', code: 10},
+        {text: 'автоэлектростеклоподъемники', code: 11}
+    ];
+
+    ReactDOM.render(
+        React.createElement(Filter, {words: arrayWords}),
+        document.getElementById('container')
+    );
+
+</script>
+
+</body>
+</html>
