@@ -1,0 +1,17 @@
+#container .Table .Table {
+    border: 1px solid black;
+    border-collapse: collapse
+}
+
+#container .Table .Table .TableHead th {
+    border: 1px solid black;
+}
+
+#container .Table .Table .Products td {
+    border: 1px solid black;
+}
+
+
+#container .Table .Table .Products .SelectedElement {
+    background-color: orange;
+}
