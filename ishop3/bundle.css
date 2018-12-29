@@ -1,0 +1,13 @@
+#container .Table .Table .TableHead th {
+    border: 1px solid black;
+}#container .Table .Table .Products td {
+    border: 1px solid black;
+}
+
+#container .Table .Table .Products .SelectedElement {
+    background-color: orange;
+}#container .Table .Table {
+    border: 1px solid black;
+    border-collapse: collapse
+}
+/*# sourceMappingURL=bundle.css.map*/

@@ -1,0 +1,17 @@
+[
+  {"id": 1, "name": "Samsung Galaxy A7 SM-A750 (2018) 4GB/64GB (розовый)", "price": 744,
+    "url": "https://content2.onliner.by/catalog/device/header/5a48e6c54e5086d2d754e775b00c7a14.jpeg",
+    "item": 100},
+  {"id": 2, "name": "Honor 8X 4GB/64GB JSN-L21 (синий)", "price": 599,
+    "url": "https://content2.onliner.by/catalog/device/header/f1ee0896e37af649e7c6a19810b7f05b.jpeg",
+    "item": 20},
+  {"id": 3, "name": "Xiaomi Mi 8 Lite 4GB/64GB международная версия (синий)", "price": 640,
+    "url": "https://content2.onliner.by/catalog/device/header/497159732ee28be162a43af67aa678ce.jpeg",
+    "item": 5},
+  {"id": 4, "name": "Huawei P20 Lite ANE-LX1 (полночный черный)", "price": 570,
+    "url": "https://content2.onliner.by/catalog/device/header/375bf1e3be111c4f77ccd54d749bbe81.jpeg",
+    "item": 41},
+  {"id": 5, "name": "Xiaomi Redmi 6A 2GB/16GB международная версия (черный)", "price": 255,
+    "url": "https://content2.onliner.by/catalog/device/header/ba8fffa190292a726f8479500d7fba3e.jpeg",
+    "item": 1000}
+]
