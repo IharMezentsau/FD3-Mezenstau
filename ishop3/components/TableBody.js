@@ -15,38 +15,14 @@ class TableBody extends React.Component {
                 item: PropTypes.number.isRequired,
             }),
         ),
-        cbStateProduct: PropTypes.any,
-    };
-
-    state = {
-        currentElement: false,
-        myPropsProducts: this.props.products,
-    };
-
-    deleteElement = (key) => {
-        if (confirm('Are you sure?'))
-            this.setState({myPropsProducts: this.state.myPropsProducts.filter(el => el.id !== key)});
-    };
-
-    editElement = (key) => {
-        if (confirm('Are you sure?'))
-            this.setState({myPropsProducts: this.state.myPropsProducts.filter(el => el.id !== key)});
-    };
-
-    clickElement = (e, key) => {
-        if (this.state.currentElement)
-            this.state.currentElement.className = this.state.currentElement.className.replace(/SelectedElement/g, "");
-
-        let EO = e.currentTarget;
-
-        this.setState({currentElement: EO});
-        EO.className = 'SelectedElement';
-        this.props.cbStateProduct.setState({product: this.state.myPropsProducts.filter(el => el.id === key)[0]});
+        cbDeleteElement: PropTypes.func,
+        cbEditElement: PropTypes.func,
+        cbClickElement: PropTypes.func,
     };
 
     render() {
-        let tableData = this.state.myPropsProducts.map(value =>
-            <tr key={value.id} onClick={(e) => this.clickElement(e, value.id)}>
+        let tableData = this.props.products.map(value =>
+            <tr key={value.id} onClick={(e) => this.props.cbClickElement(e, value.id)}>
                 <td className='Name'>{value.name}</td>
                 <td className='Price'>{value.price}</td>
                 <td className='URL'>
@@ -54,8 +30,8 @@ class TableBody extends React.Component {
                 </td>
                 <td className='Item'>{value.item}</td>
                 <td className='Control'>
-                    <button className='BtnDelete' onClick={() => this.deleteElement(value.id)}>Delete</button>
-                    <button className='BtnEdit' onClick={() => this.editElement(value.id)}>Edit</button>
+                    <button className='BtnDelete' onClick={() => this.props.cbDeleteElement(value.id)}>Delete</button>
+                    <button className='BtnEdit' onClick={(e) => this.props.cbEditElement(e, value.id)}>Edit</button>
                 </td>
             </tr>
         );

@@ -1026,6 +1026,10 @@ var _Product2 = _interopRequireDefault(_Product);
 
 __webpack_require__(41);
 
+var _EditProduct = __webpack_require__(42);
+
+var _EditProduct2 = _interopRequireDefault(_EditProduct);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1049,13 +1053,42 @@ var Table = function (_React$Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Table.__proto__ || Object.getPrototypeOf(Table)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            currentElement: false,
+            myPropsProducts: _this.props.products,
+            workMode: 0,
             product: false
+        }, _this.deleteElement = function (key) {
+            if (confirm('Are you sure?')) _this.setState({ myPropsProducts: _this.state.myPropsProducts.filter(function (el) {
+                    return el.id !== key;
+                }) });
+        }, _this.editElement = function (e, key) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            _this.setState({ workMode: 1, product: _this.state.myPropsProducts.filter(function (el) {
+                    return el.id === key;
+                })[0] });
+        }, _this.clickElement = function (e, key) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            if (_this.state.currentElement) _this.state.currentElement.className = _this.state.currentElement.className.replace(/SelectedElement/g, "");
+
+            var EO = e.currentTarget;
+
+            _this.setState({ currentElement: EO });
+            EO.className = 'SelectedElement';
+            _this.setState({ workMode: 0,
+                product: _this.state.myPropsProducts.filter(function (el) {
+                    return el.id === key;
+                })[0] });
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(Table, [{
         key: 'render',
         value: function render() {
+            console.log(this.state.workMode);
             return _react2.default.createElement(
                 'div',
                 { className: 'Table' },
@@ -1069,16 +1102,18 @@ var Table = function (_React$Component) {
                         priceHead: this.props.tableHead.priceHead,
                         urlHead: this.props.tableHead.urlHead,
                         itemHead: this.props.tableHead.itemHead,
-                        controlHead: this.props.tableHead.controlHead
-                    }),
-                    _react2.default.createElement(_TableBody2.default, { products: this.props.products, cbStateProduct: this })
+                        controlHead: this.props.tableHead.controlHead }),
+                    _react2.default.createElement(_TableBody2.default, { products: this.state.myPropsProducts,
+                        cbClickElement: this.clickElement,
+                        cbDeleteElement: this.deleteElement,
+                        cbEditElement: this.editElement })
                 ),
                 _react2.default.createElement(
                     'button',
                     null,
                     'New product'
                 ),
-                this.state.product && _react2.default.createElement(_Product2.default, { product: this.state.product })
+                this.state.product && (this.state.workMode === 1 ? _react2.default.createElement(_EditProduct2.default, { product: this.state.product, cbStateProduct: this.state.product }) : _react2.default.createElement(_Product2.default, { product: this.state.product }))
             );
         }
     }]);
@@ -1129,7 +1164,7 @@ var _Table2 = _interopRequireDefault(_Table);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var data = __webpack_require__(42),
+var data = __webpack_require__(44),
     tableHead = {
     idHead: 50,
     nameHead: 'Наименование',
@@ -21514,38 +21549,9 @@ var TableBody = function (_React$Component) {
     _inherits(TableBody, _React$Component);
 
     function TableBody() {
-        var _ref;
-
-        var _temp, _this, _ret;
-
         _classCallCheck(this, TableBody);
 
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-            args[_key] = arguments[_key];
-        }
-
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = TableBody.__proto__ || Object.getPrototypeOf(TableBody)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            currentElement: false,
-            myPropsProducts: _this.props.products
-        }, _this.deleteElement = function (key) {
-            if (confirm('Are you sure?')) _this.setState({ myPropsProducts: _this.state.myPropsProducts.filter(function (el) {
-                    return el.id !== key;
-                }) });
-        }, _this.editElement = function (key) {
-            if (confirm('Are you sure?')) _this.setState({ myPropsProducts: _this.state.myPropsProducts.filter(function (el) {
-                    return el.id !== key;
-                }) });
-        }, _this.clickElement = function (e, key) {
-            if (_this.state.currentElement) _this.state.currentElement.className = _this.state.currentElement.className.replace(/SelectedElement/g, "");
-
-            var EO = e.currentTarget;
-
-            _this.setState({ currentElement: EO });
-            EO.className = 'SelectedElement';
-            _this.props.cbStateProduct.setState({ product: _this.state.myPropsProducts.filter(function (el) {
-                    return el.id === key;
-                })[0] });
-        }, _temp), _possibleConstructorReturn(_this, _ret);
+        return _possibleConstructorReturn(this, (TableBody.__proto__ || Object.getPrototypeOf(TableBody)).apply(this, arguments));
     }
 
     _createClass(TableBody, [{
@@ -21553,11 +21559,11 @@ var TableBody = function (_React$Component) {
         value: function render() {
             var _this2 = this;
 
-            var tableData = this.state.myPropsProducts.map(function (value) {
+            var tableData = this.props.products.map(function (value) {
                 return _react2.default.createElement(
                     'tr',
                     { key: value.id, onClick: function onClick(e) {
-                            return _this2.clickElement(e, value.id);
+                            return _this2.props.cbClickElement(e, value.id);
                         } },
                     _react2.default.createElement(
                         'td',
@@ -21585,14 +21591,14 @@ var TableBody = function (_React$Component) {
                         _react2.default.createElement(
                             'button',
                             { className: 'BtnDelete', onClick: function onClick() {
-                                    return _this2.deleteElement(value.id);
+                                    return _this2.props.cbDeleteElement(value.id);
                                 } },
                             'Delete'
                         ),
                         _react2.default.createElement(
                             'button',
-                            { className: 'BtnEdit', onClick: function onClick() {
-                                    return _this2.editElement(value.id);
+                            { className: 'BtnEdit', onClick: function onClick(e) {
+                                    return _this2.props.cbEditElement(e, value.id);
                                 } },
                             'Edit'
                         )
@@ -21619,7 +21625,9 @@ TableBody.propTypes = {
         url: _propTypes2.default.string.isRequired,
         item: _propTypes2.default.number.isRequired
     })),
-    cbStateProduct: _propTypes2.default.any
+    cbDeleteElement: _propTypes2.default.func,
+    cbEditElement: _propTypes2.default.func,
+    cbClickElement: _propTypes2.default.func
 };
 exports.default = TableBody;
 
@@ -21676,7 +21684,6 @@ var Product = function (_React$Component) {
     _createClass(Product, [{
         key: 'render',
         value: function render() {
-            console.log(this.props.product);
             return _react2.default.createElement(
                 'div',
                 { key: 'product-' + this.props.product.id },
@@ -21732,6 +21739,125 @@ exports.default = Product;
 
 /***/ }),
 /* 42 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(4);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+__webpack_require__(43);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var EditProduct = function (_React$Component) {
+    _inherits(EditProduct, _React$Component);
+
+    function EditProduct() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, EditProduct);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+            product: _this.props.product
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(EditProduct, [{
+        key: 'changeDiv',
+        value: function changeDiv(e, type) {
+            this.state.product[type] = e.target.value;
+        }
+    }, {
+        key: 'saveChangeProduct',
+        value: function saveChangeProduct() {
+            this.props.cbStateProduct = this.state.product;
+        }
+    }, {
+        key: 'render',
+        value: function render() {
+            var _this2 = this;
+
+            return _react2.default.createElement(
+                'div',
+                { key: 'productEdit-' + this.state.product.id },
+                'ID: ',
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    this.state.product.id
+                ),
+                'Name: ',
+                _react2.default.createElement('input', { defaultValue: this.state.product.name, onChange: function onChange(e) {
+                        return _this2.changeDiv(e, 'name');
+                    } }),
+                'Price: ',
+                _react2.default.createElement('input', { defaultValue: this.state.product.price, onChange: function onChange(e) {
+                        return _this2.changeDiv(e, 'price');
+                    } }),
+                'url: ',
+                _react2.default.createElement('input', { defaultValue: this.state.product.url, onChange: function onChange(e) {
+                        return _this2.changeDiv(e, 'url');
+                    } }),
+                'Quantity: ',
+                _react2.default.createElement('input', { defaultValue: this.state.product.item, onChange: function onChange(e) {
+                        return _this2.changeDiv(e, 'item');
+                    } }),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.saveChangeProduct },
+                    'Save'
+                ),
+                _react2.default.createElement(
+                    'button',
+                    null,
+                    'Cancel'
+                )
+            );
+        }
+    }]);
+
+    return EditProduct;
+}(_react2.default.Component);
+
+EditProduct.propTypes = {
+    product: _propTypes2.default.shape({}),
+    cbStateProduct: _propTypes2.default.any
+};
+exports.default = EditProduct;
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 44 */
 /***/ (function(module, exports) {
 
 module.exports = [{"id":1,"name":"Samsung Galaxy A7 SM-A750 (2018) 4GB/64GB (розовый)","price":744,"url":"https://content2.onliner.by/catalog/device/header/5a48e6c54e5086d2d754e775b00c7a14.jpeg","item":100},{"id":2,"name":"Honor 8X 4GB/64GB JSN-L21 (синий)","price":599,"url":"https://content2.onliner.by/catalog/device/header/f1ee0896e37af649e7c6a19810b7f05b.jpeg","item":20},{"id":3,"name":"Xiaomi Mi 8 Lite 4GB/64GB международная версия (синий)","price":640,"url":"https://content2.onliner.by/catalog/device/header/497159732ee28be162a43af67aa678ce.jpeg","item":5},{"id":4,"name":"Huawei P20 Lite ANE-LX1 (полночный черный)","price":570,"url":"https://content2.onliner.by/catalog/device/header/375bf1e3be111c4f77ccd54d749bbe81.jpeg","item":41},{"id":5,"name":"Xiaomi Redmi 6A 2GB/16GB международная версия (черный)","price":255,"url":"https://content2.onliner.by/catalog/device/header/ba8fffa190292a726f8479500d7fba3e.jpeg","item":1000}]

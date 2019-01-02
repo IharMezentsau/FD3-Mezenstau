@@ -7,6 +7,7 @@ import TableBody from "./TableBody";
 import Product from './Product';
 
 import './Table.css';
+import EditProduct from "./EditProduct";
 
 class Table extends React.Component {
 
@@ -32,10 +33,43 @@ class Table extends React.Component {
     };
 
     state = {
+        currentElement: false,
+        myPropsProducts: this.props.products,
+        workMode: 0,
         product: false,
     };
 
+
+    deleteElement = (key) => {
+        if (confirm('Are you sure?'))
+            this.setState({myPropsProducts: this.state.myPropsProducts.filter(el => el.id !== key)});
+    };
+
+    editElement = (e, key) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        this.setState({workMode: 1, product: this.state.myPropsProducts.filter(el => el.id === key)[0]});
+    };
+
+    clickElement = (e, key) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        if (this.state.currentElement)
+            this.state.currentElement.className = this.state.currentElement.className.replace(/SelectedElement/g, "");
+
+        let EO = e.currentTarget;
+
+        this.setState({currentElement: EO});
+        EO.className = 'SelectedElement';
+        this.setState({workMode: 0,
+            product: this.state.myPropsProducts.filter(el => el.id === key)[0]});
+    };
+
+
     render() {
+        console.log(this.state.workMode);
         return (
             <div className='Table'>
                 <TableName tableName={this.props.tableName}/>
@@ -46,12 +80,16 @@ class Table extends React.Component {
                         priceHead={this.props.tableHead.priceHead}
                         urlHead={this.props.tableHead.urlHead}
                         itemHead={this.props.tableHead.itemHead}
-                        controlHead={this.props.tableHead.controlHead}
-                    />
-                    <TableBody products={this.props.products} cbStateProduct={this}/>
+                        controlHead={this.props.tableHead.controlHead} />
+                    <TableBody products={this.state.myPropsProducts}
+                               cbClickElement={this.clickElement}
+                               cbDeleteElement={this.deleteElement}
+                               cbEditElement={this.editElement} />
                 </table>
                 <button>New product</button>
-                {this.state.product && <Product product={this.state.product} />}
+                {this.state.product && ( this.state.workMode === 1 ?
+                    <EditProduct product={this.state.product} cbStateProduct={this.state.product} /> :
+                        <Product product={this.state.product} /> ) }
             </div>
         )
     }
