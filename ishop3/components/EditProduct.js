@@ -17,25 +17,30 @@ class EditProduct extends React.Component {
     };
 
     state = {
-        product: this.props.product,
+        name: this.props.product.name,
+        price: this.props.product.price,
+        url: this.props.product.url,
+        item: this.props.product.item,
     };
 
     changeDiv(e, type) {
-        this.state.product[type] = e.target.value;
+        let a = {};
+        a[type] = e.target.value;
+        this.setState(a);
     };
 
     saveChangeProduct() {
-        this.props.cbStateProduct = this.state.product;
+        //this.props.cbStateProduct = this.state.product;
     };
 
     render() {
         return (
-            <div key={`productEdit-${this.state.product.id}`}>
-                ID: <p>{this.state.product.id}</p>
-                Name: <input defaultValue={this.state.product.name} onChange={(e) => this.changeDiv(e, 'name')}/>
-                Price: <input defaultValue={this.state.product.price} onChange={(e) => this.changeDiv(e, 'price')}/>
-                url: <input defaultValue={this.state.product.url} onChange={(e) => this.changeDiv(e, 'url')}/>
-                Quantity: <input defaultValue={this.state.product.item} onChange={(e) => this.changeDiv(e, 'item')}/>
+            <div key={`productEdit-${this.props.product.id}`}>
+                ID: <p>{this.props.product.id}</p>
+                Name: <input defaultValue={this.state.name} onChange={(e) => this.changeDiv(e, 'name')}/>
+                Price: <input defaultValue={this.state.price} onChange={(e) => this.changeDiv(e, 'price')}/>
+                url: <input defaultValue={this.state.url} onChange={(e) => this.changeDiv(e, 'url')}/>
+                Quantity: <input defaultValue={this.state.item} onChange={(e) => this.changeDiv(e, 'item')}/>
                 <button onClick={this.saveChangeProduct}>Save</button>
                 <button>Cancel</button>
             </div>

@@ -21783,19 +21783,24 @@ var EditProduct = function (_React$Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = EditProduct.__proto__ || Object.getPrototypeOf(EditProduct)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
-            product: _this.props.product
+            name: _this.props.product.name,
+            price: _this.props.product.price,
+            url: _this.props.product.url,
+            item: _this.props.product.item
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
     _createClass(EditProduct, [{
         key: 'changeDiv',
         value: function changeDiv(e, type) {
-            this.state.product[type] = e.target.value;
+            var a = {};
+            a[type] = e.target.value;
+            this.setState(a);
         }
     }, {
         key: 'saveChangeProduct',
         value: function saveChangeProduct() {
-            this.props.cbStateProduct = this.state.product;
+            //this.props.cbStateProduct = this.state.product;
         }
     }, {
         key: 'render',
@@ -21804,27 +21809,27 @@ var EditProduct = function (_React$Component) {
 
             return _react2.default.createElement(
                 'div',
-                { key: 'productEdit-' + this.state.product.id },
+                { key: 'productEdit-' + this.props.product.id },
                 'ID: ',
                 _react2.default.createElement(
                     'p',
                     null,
-                    this.state.product.id
+                    this.props.product.id
                 ),
                 'Name: ',
-                _react2.default.createElement('input', { defaultValue: this.state.product.name, onChange: function onChange(e) {
+                _react2.default.createElement('input', { defaultValue: this.state.name, onChange: function onChange(e) {
                         return _this2.changeDiv(e, 'name');
                     } }),
                 'Price: ',
-                _react2.default.createElement('input', { defaultValue: this.state.product.price, onChange: function onChange(e) {
+                _react2.default.createElement('input', { defaultValue: this.state.price, onChange: function onChange(e) {
                         return _this2.changeDiv(e, 'price');
                     } }),
                 'url: ',
-                _react2.default.createElement('input', { defaultValue: this.state.product.url, onChange: function onChange(e) {
+                _react2.default.createElement('input', { defaultValue: this.state.url, onChange: function onChange(e) {
                         return _this2.changeDiv(e, 'url');
                     } }),
                 'Quantity: ',
-                _react2.default.createElement('input', { defaultValue: this.state.product.item, onChange: function onChange(e) {
+                _react2.default.createElement('input', { defaultValue: this.state.item, onChange: function onChange(e) {
                         return _this2.changeDiv(e, 'item');
                     } }),
                 _react2.default.createElement(
@@ -21845,7 +21850,13 @@ var EditProduct = function (_React$Component) {
 }(_react2.default.Component);
 
 EditProduct.propTypes = {
-    product: _propTypes2.default.shape({}),
+    product: _propTypes2.default.shape({
+        id: _propTypes2.default.number.isRequired,
+        name: _propTypes2.default.string.isRequired,
+        price: _propTypes2.default.number.isRequired,
+        url: _propTypes2.default.string.isRequired,
+        item: _propTypes2.default.number.isRequired
+    }),
     cbStateProduct: _propTypes2.default.any
 };
 exports.default = EditProduct;
