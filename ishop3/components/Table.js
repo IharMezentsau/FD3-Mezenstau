@@ -39,7 +39,6 @@ class Table extends React.Component {
         product: false,
     };
 
-
     deleteElement = (key) => {
         if (confirm('Are you sure?'))
             this.setState({myPropsProducts: this.state.myPropsProducts.filter(el => el.id !== key)});
@@ -50,6 +49,13 @@ class Table extends React.Component {
         e.preventDefault();
 
         this.setState({workMode: 1, product: this.state.myPropsProducts.filter(el => el.id === key)[0]});
+    };
+
+    saveElement = (newEl) => {
+        let products = this.state.myPropsProducts.map(el => el.id === newEl.id ? newEl : el);
+
+        this.setState({workMode: 0, myPropsProducts: products, product: false});
+
     };
 
     clickElement = (e, key) => {
@@ -69,7 +75,6 @@ class Table extends React.Component {
 
 
     render() {
-        console.log(this.state.workMode);
         return (
             <div className='Table'>
                 <TableName tableName={this.props.tableName}/>
@@ -88,8 +93,8 @@ class Table extends React.Component {
                 </table>
                 <button>New product</button>
                 {this.state.product && ( this.state.workMode === 1 ?
-                    <EditProduct product={this.state.product} cbStateProduct={this.state.product} /> :
-                        <Product product={this.state.product} /> ) }
+                    <EditProduct product={this.state.product} cbSaveProduct={this.saveElement} /> :
+                    <Product product={this.state.product} /> ) }
             </div>
         )
     }

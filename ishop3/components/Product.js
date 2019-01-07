@@ -20,8 +20,12 @@ class Product extends React.Component {
         return (
             <div key={`product-${this.props.product.id}`}>
                 <h2 className='Name'>{this.props.product.name}</h2>
-                Price: <h2 className='Price'>{this.props.product.price}</h2>
-                Item: <h2 className='Item'>{this.props.product.item}</h2>
+                <p className='Price'>
+                    Price: {this.props.product.price}
+                </p>
+                <p className='Item'>
+                    Item: {this.props.product.item}
+                </p>
                 <img src={this.props.product.url} alt={this.props.product.name}/>
             </div>
         );
