@@ -22,7 +22,6 @@ const RainbowFrame = (props) => {
 
 RainbowFrame.propTypes = {
     colors: PropTypes.array.isRequired,
-    //text: PropTypes.string.isRequired,
 };
 
 export default RainbowFrame;
