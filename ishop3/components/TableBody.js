@@ -30,7 +30,7 @@ class TableBody extends React.Component {
                 </td>
                 <td className='Item'>{value.item}</td>
                 <td className='Control'>
-                    <button className='BtnDelete' onClick={() => this.props.cbDeleteElement(value.id)}>Delete</button>
+                    <button className='BtnDelete' onClick={(e) => this.props.cbDeleteElement(e, value.id)}>Delete</button>
                     <button className='BtnEdit' onClick={(e) => this.props.cbEditElement(e, value.id)}>Edit</button>
                 </td>
             </tr>

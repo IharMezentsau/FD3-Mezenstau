@@ -1,40 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './EditProduct.css';
+import './NewProduct.css';
 
-class EditProduct extends React.Component {
+class NewProduct extends React.Component {
 
     static propTypes = {
-        product: PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-            price: PropTypes.number.isRequired,
-            url: PropTypes.string.isRequired,
-            item: PropTypes.number.isRequired,
-        }),
         cbSaveProduct: PropTypes.func.isRequired,
         cbCancelProduct: PropTypes.func.isRequired,
     };
 
     state = {
-        id: this.props.product.id,
-        name: this.props.product.name,
-        price: this.props.product.price,
-        url: this.props.product.url,
-        item: this.props.product.item,
+        name: '',
+        item: '',
+        price: '',
+        url: '',
         error: { // 0 - OK; 1 - empty; 2 - type; 3 - value;
-            name: {code: 0, text: ''},
-            price: {code: 0, text: ''},
-            url: {code: 0, text: ''},
-            item: {code: 0, text: ''},
+            name: {code: 1, text: `Поле name не должно быть пустым`},
+            price: {code: 1, text: `Поле price не должно быть пустым`},
+            url: {code: 1, text: `Поле url не должно быть пустым`},
+            item: {code: 1, text: `Поле item не должно быть пустым`},
         },
-        hasError: false,
-    };
-
-    componentWillReceiveProps = (newProps) => {
-        this.setState({id: newProps.product.id, name: newProps.product.name, price: newProps.product.price,
-            url: newProps.product.url, item: newProps.product.item,});
+        hasError: true,
     };
 
     changeDiv(e, type) {
@@ -87,7 +74,6 @@ class EditProduct extends React.Component {
 
     saveChangeProduct = () => {
         let product = {
-            id: Number(this.state.id),
             name: String(this.state.name),
             price: Number(this.state.price),
             url: String(this.state.url),
@@ -99,13 +85,12 @@ class EditProduct extends React.Component {
 
     render() {
         return (
-            <div key={`productEdit-${this.state.id}`}>
-                ID: {this.state.id}
+            <div>
                 <div className='Name'>
                     Name: <input defaultValue={this.state.name}
                                  onBlur={(e) => this.validationInput(e, 'string', 'name')}
                                  onChange={(e) => {
-                                     this.changeDiv(e, 'name');
+                                     this.changeDiv(e, 'name')
                                      this.validationInput(e, 'string', 'name');
                                  }}/>
                     {this.state.error.name.code ? <span className='Error'>{this.state.error.name.text}</span> : null}
@@ -115,7 +100,7 @@ class EditProduct extends React.Component {
                                   onBlur={(e) => this.validationInput(e, 'number', 'price')}
                                   onChange={(e) => {
                                       this.changeDiv(e, 'price');
-                                      this.validationInput(e, 'number', 'price')
+                                      this.validationInput(e, 'number', 'price');
                                   }}/>
                     {this.state.error.price.code ? <span className='Error'>{this.state.error.price.text}</span> : null}
                 </div>
@@ -124,7 +109,7 @@ class EditProduct extends React.Component {
                                 onBlur={(e) => this.validationInput(e, 'string', 'url')}
                                 onChange={(e) => {
                                     this.changeDiv(e, 'url');
-                                    this.validationInput(e, 'string', 'url')
+                                    this.validationInput(e, 'string', 'url');
                                 }}/>
                     {this.state.error.url.code ? <span className='Error'>{this.state.error.url.text}</span> : null}
                 </div>
@@ -146,4 +131,4 @@ class EditProduct extends React.Component {
 
 }
 
-export default EditProduct;
+export default NewProduct;

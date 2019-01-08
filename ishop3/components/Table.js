@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 import TableName from './TableName';
 import TableHead from './TableHead';
 import TableBody from "./TableBody";
+import EditProduct from "./EditProduct";
+import NewProduct from "./NewProduct";
 import Product from './Product';
 
 import './Table.css';
-import EditProduct from "./EditProduct";
 
 class Table extends React.Component {
 
@@ -35,32 +36,62 @@ class Table extends React.Component {
     state = {
         currentElement: false,
         myPropsProducts: this.props.products,
-        workMode: 0,
+        workMode: 0, // 0-null; 1-Product; 2-EditProduct; 3-NewProduct;
         product: false,
     };
 
-    deleteElement = (key) => {
+    defaultMode = () => {
+        this.setState({product: false, workMode: 0});
+    };
+
+    deleteElement = (e, key) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if (this.state.workMode !== 0 && this.state.workMode !== 1)
+            if (!confirm('Are you sure exit from this mode?')) return;
+
         if (confirm('Are you sure?'))
             this.setState({myPropsProducts: this.state.myPropsProducts.filter(el => el.id !== key)});
+        if (this.state.product.id === key) this.defaultMode();
     };
 
     editElement = (e, key) => {
         e.stopPropagation();
         e.preventDefault();
+        if (this.state.workMode !== 0 && this.state.workMode !== 1)
+            if (!confirm('Are you sure exit from this mode?')) return;
+        this.setState({workMode: 2, product: this.state.myPropsProducts.filter(el => el.id === key)[0]});
+    };
 
-        this.setState({workMode: 1, product: this.state.myPropsProducts.filter(el => el.id === key)[0]});
+    newElement = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        if (this.state.workMode !== 0 && this.state.workMode !== 1)
+            if (!confirm('Are you sure exit from this mode?')) return;
+        this.setState({workMode: 3});
     };
 
     saveElement = (newEl) => {
         let products = this.state.myPropsProducts.map(el => el.id === newEl.id ? newEl : el);
+        this.setState({myPropsProducts: products});
+        this.defaultMode();
+    };
 
-        this.setState({workMode: 0, myPropsProducts: products, product: false});
-
+    saveNewElement = (newEl) => {
+        let products = this.state.myPropsProducts,
+            maxKey = Math.max.apply(null, products.map(el => el.id));
+        newEl.id = ++maxKey;
+        products.push(newEl);
+        this.setState({myPropsProducts: products});
+        this.defaultMode();
     };
 
     clickElement = (e, key) => {
         e.stopPropagation();
         e.preventDefault();
+
+        if (this.state.workMode !== 0 && this.state.workMode !== 1)
+            if (!confirm('Are you sure exit from this mode?')) return;
 
         if (this.state.currentElement)
             this.state.currentElement.className = this.state.currentElement.className.replace(/SelectedElement/g, "");
@@ -69,10 +100,22 @@ class Table extends React.Component {
 
         this.setState({currentElement: EO});
         EO.className = 'SelectedElement';
-        this.setState({workMode: 0,
+        this.setState({workMode: 1,
             product: this.state.myPropsProducts.filter(el => el.id === key)[0]});
     };
 
+    switchMode() {
+        switch (this.state.workMode) {
+            case 0: return null;
+            case 1:
+                return <Product product={this.state.product} />;
+            case 2:
+                return <EditProduct product={this.state.product} cbSaveProduct={this.saveElement}
+                                    cbCancelProduct={this.defaultMode} />;
+            case 3:
+                return <NewProduct cbSaveProduct={this.saveNewElement} cbCancelProduct={this.defaultMode} />;
+        }
+    };
 
     render() {
         return (
@@ -91,10 +134,8 @@ class Table extends React.Component {
                                cbDeleteElement={this.deleteElement}
                                cbEditElement={this.editElement} />
                 </table>
-                <button>New product</button>
-                {this.state.product && ( this.state.workMode === 1 ?
-                    <EditProduct product={this.state.product} cbSaveProduct={this.saveElement} /> :
-                    <Product product={this.state.product} /> ) }
+                <button onClick={e => this.newElement(e)}>New product</button>
+                {this.switchMode()}
             </div>
         )
     }
