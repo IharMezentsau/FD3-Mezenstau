@@ -1,0 +1,7 @@
+.ActiveClient {
+    background-color: green;
+}
+
+.BlockedClient {
+    background-color: red;
+}

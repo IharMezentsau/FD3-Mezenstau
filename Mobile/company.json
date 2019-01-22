@@ -1,0 +1,20 @@
+[
+  {
+    "name": "МТС",
+    "clients": [
+          {"id": 0, "lastname": "Иванов", "firstname": "Иван", "patronymic": "Иванович", "balance": 200},
+          {"id": 1, "lastname": "Сидоров", "firstname": "Сидор", "patronymic": "Сидорович", "balance": 250},
+          {"id": 2, "lastname": "Петров", "firstname": "Петр", "patronymic": "Петрович", "balance": 180},
+          {"id": 3, "lastname": "Григорьев", "firstname": "Григорий", "patronymic": "Григорьевич", "balance": -220}
+      ]
+  },
+  {
+    "name": "Velcom",
+    "clients": [
+          {"id": 0, "lastname": "Иванов", "firstname": "Иван", "patronymic": "Иванович", "balance": 200},
+          {"id": 1, "lastname": "Сидоров", "firstname": "Сидор", "patronymic": "Сидорович", "balance": 250},
+          {"id": 2, "lastname": "Петров", "firstname": "Петр", "patronymic": "Петрович", "balance": 180},
+          {"id": 3, "lastname": "Григорьев", "firstname": "Григорий", "patronymic": "Григорьевич", "balance": -220}
+      ]
+  }
+]
