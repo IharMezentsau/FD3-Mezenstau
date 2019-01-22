@@ -91,7 +91,6 @@ class MobileCompanies extends React.PureComponent {
     selectSomeCompany = (indexCompany) => {
         const newSelectCompany = this.state.companies[indexCompany];
         this.setState({
-            activeCompany: newSelectCompany,
             selectClients: newSelectCompany.clients,
             indexActiveCompany: indexCompany,
             workMode: 0,
@@ -100,8 +99,8 @@ class MobileCompanies extends React.PureComponent {
     };
 
     setWorkMode = (workMode, idClient) => {
-         let client = this.state.selectClients.filter((client) => client.id === idClient)[0];
-         this.setState({workMode: workMode, client: client});
+        let client = this.state.selectClients.filter((clnt) => clnt ? clnt.id === idClient : undefined)[0];
+        this.setState({workMode: workMode, client: client});
     };
 
     handlerSaveEditClient = (client) => {
@@ -225,7 +224,9 @@ class MobileCompanies extends React.PureComponent {
         return (
             <Fragment>
                 {companies}
-                <p key={`nameCompany${this.state.activeCompany.name}`}>Компания: {this.state.activeCompany.name}</p>
+                <p key={`nameCompany${this.state.companies[this.state.indexActiveCompany].name}`}>
+                    Компания: {this.state.companies[this.state.indexActiveCompany].name}
+                </p>
                 <hr/>
                 <button key='btnAll' onClick={() => this.changeSortMode(0)}>Все</button>
                 <button key='btnActive' onClick={() => this.changeSortMode(1)}>Активные</button>
