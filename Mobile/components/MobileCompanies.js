@@ -27,7 +27,6 @@ class MobileCompanies extends React.PureComponent {
 
     state = {
         companies: this.props.companies,
-        activeCompany: this.props.companies[0],
         indexActiveCompany: 0,
         selectClients: this.props.companies[0].clients,
         sortMode: 0, // 0 - All, 1 - Active, 2 - Blocked
