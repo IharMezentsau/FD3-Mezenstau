@@ -165,7 +165,6 @@ class MobileCompanies extends React.PureComponent {
             case 1:
                 let maxId = Math.max
                     .apply(null, this.state.companies[this.state.indexActiveCompany].clients.map(o => o.id));
-                console.log(maxId);
                 return <NewClient idMax={maxId}/>;
             case 2:
                 return <EditClient client={this.state.client}/>
