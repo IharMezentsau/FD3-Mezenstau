@@ -94,6 +94,8 @@ class MobileCompanies extends React.PureComponent {
             activeCompany: newSelectCompany,
             selectClients: newSelectCompany.clients,
             indexActiveCompany: indexCompany,
+            workMode: 0,
+            client: null,
         });
     };
 
