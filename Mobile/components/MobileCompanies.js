@@ -55,8 +55,7 @@ class MobileCompanies extends React.PureComponent {
 
         newAllSelected.forEach((client, i) => {
             if (client !== this.state.selectClients[i]) {
-                let newClients = {...client};
-                newAllSelected[i] = newClients;
+                newAllSelected[i] = client;
                 changed = true;
             }
         });
@@ -137,7 +136,6 @@ class MobileCompanies extends React.PureComponent {
 
     handlerSaveNewClient = (client) => {
         let newArrayCompanies = this.state.companies,
-            newArraySelectClients = [...this.state.selectClients],
             changed = false;
 
         newArrayCompanies.forEach((company, i) => {
@@ -153,7 +151,6 @@ class MobileCompanies extends React.PureComponent {
         if (changed)
             this.setState({
                 companies: newArrayCompanies,
-                selectClients: newArraySelectClients,
             });
         this.changeSortMode(this.state.sortMode);
     };
