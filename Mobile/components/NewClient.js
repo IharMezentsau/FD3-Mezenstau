@@ -11,6 +11,7 @@ class NewClient extends React.PureComponent {
 
     state = {
         id: this.props.idMax,
+        firstname: '',
     };
 
     cancelButton = () => {
