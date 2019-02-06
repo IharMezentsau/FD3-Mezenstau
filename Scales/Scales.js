@@ -19,9 +19,19 @@ var Scales = /** @class */ (function () {
         this.products.push(product);
     };
     Scales.prototype.getSumScale = function () {
-        return this.products.reduce(function (accu, currentValue) {
-            return accu + currentValue.getScale();
-        }, 0).toFixed(3);
+        // let a:number = 0;
+        //  this.products.forEach(product => {
+        //     a += product.getScale();
+        // });
+        // return a;
+        var sum = 0;
+        for (var i = this.products.length - 1; i >= 0; i--) {
+            sum += this.products[i].getScale();
+        }
+        return sum;
+        //return this.products.reduce((accu: number, currentValue: Product): number =>  {
+        //    return accu + currentValue.getScale();
+        //}, 0).toFixed(3);
     };
     Scales.prototype.getNameList = function () {
         return this.products.map(function (product) { return product.getName(); });

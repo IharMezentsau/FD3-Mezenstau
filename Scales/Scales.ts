@@ -1,21 +1,33 @@
 class Scales {
-    private products: Array<{getScale(): number, getName(): string}> = [];
+    private products: Array<Product> = [];
 
     constructor() {
 
     }
 
-    public addProduct(product: {getScale(): number, getName(): string}) {
+    public addProduct(product: Product): void {
         this.products.push(product);
     }
 
-    public getSumScale() {
-        return this.products.reduce((accu, currentValue) => {
-            return accu + currentValue.getScale();
-        }, 0).toFixed(3);
+    public getSumScale(): number {
+        // let a:number = 0;
+        //  this.products.forEach(product => {
+        //     a += product.getScale();
+        // });
+        // return a;
+        let sum: number = 0;
+        for (let i = this.products.length - 1; i >= 0; i--) {
+            sum += this.products[i].getScale();
+        }
+        //return sum.toFixed(3); //Почему ошибка с toFixed?
+        return sum;
+        //Почему ошибка в этом варианте с reduce?
+        //return this.products.reduce((accu: number, currentValue: Product): number =>  {
+        //    return accu + currentValue.getScale();
+        //}, 0).toFixed(3);
     }
 
-    public getNameList() {
+    public getNameList(): Array<string> {
         return this.products.map(product => product.getName());
     }
 
@@ -31,11 +43,11 @@ class Product {
         this.scale = scale;
     }
 
-    public getScale() {
+    public getScale(): number {
         return this.scale;
     }
 
-    public getName() {
+    public getName(): string {
         return this.name;
     }
 
@@ -46,11 +58,11 @@ class Apple extends Product {
         super(name, scale);
     }
 
-    public getScale() {
+    public getScale(): number {
         return super.getScale();
     }
 
-    public getName() {
+    public getName(): string {
         return super.getName();
     }
 }
@@ -60,11 +72,11 @@ class Tomato extends Product {
         super(name, scale);
     }
 
-    public getScale() {
+    public getScale(): number {
         return super.getScale();
     }
 
-    public getName() {
+    public getName(): string {
         return super.getName();
     }
 }
