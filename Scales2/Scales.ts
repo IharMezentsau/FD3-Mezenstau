@@ -65,10 +65,10 @@ class Tomato implements IScalable{
 }
 
 let scales = new Scales(),
-    tomat1 = new Tomato('Помидор 1', 0.5),
-    tomat2 = new Tomato('Помидор 2', 0.1),
-    apple1 = new Apple('Яблоко 1', 0.2),
-    apple2 = new Apple('Яблоко 2', 0.4);
+    tomat1: IScalable = new Tomato('Помидор 1', 0.5),
+    tomat2: IScalable = new Tomato('Помидор 2', 0.1),
+    apple1: IScalable = new Apple('Яблоко 1', 0.2),
+    apple2: IScalable = new Apple('Яблоко 2', 0.4);
 
 scales.addProduct(tomat1);
 scales.addProduct(tomat2);
