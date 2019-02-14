@@ -5,10 +5,10 @@ interface IStorageEngine {
 }
 
 class Scales<StorageEngine extends IStorageEngine> {
-    private storageEngine: IStorageEngine;
+    private storageEngine: StorageEngine;
 
-    constructor(StorageEngine: IStorageEngine) {
-        this.storageEngine = StorageEngine;
+    constructor(sE: StorageEngine) {
+        this.storageEngine = sE;
     }
 
     public addProduct(product: Product): void {

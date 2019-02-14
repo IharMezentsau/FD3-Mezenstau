@@ -1,6 +1,6 @@
 var Scales = /** @class */ (function () {
-    function Scales(StorageEngine) {
-        this.storageEngine = StorageEngine;
+    function Scales(sE) {
+        this.storageEngine = sE;
     }
     Scales.prototype.addProduct = function (product) {
         this.storageEngine.addItem(product);
@@ -51,7 +51,6 @@ var ScalesStorageEngineLocalStorage = /** @class */ (function () {
     };
     ;
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
-        //return JSON.parse(localStorage[this.products[index]]);
         var product = JSON.parse(localStorage[this.products[index]]);
         return new Product(product.name, product.scale);
     };
