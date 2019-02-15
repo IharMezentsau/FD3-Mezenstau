@@ -7,3 +7,47 @@ Mobile/node_modules/
 Mobile/__tests__/__snapshots__
 FD3-TypeScript-V4
 FD3-Angular-V4
+
+
+Sprite/dist
+Sprite/tmp
+Sprite/out-tsc
+
+# dependencies
+Sprite/node_modules
+
+# profiling files
+Sprite/chrome-profiler-events.json
+Sprite/speed-measure-plugin.json
+
+# IDEs and editors
+Sprite/.idea
+Sprite/.project
+Sprite/.classpath
+Sprite/.c9/
+Sprite/*.launch
+Sprite/.settings/
+Sprite/*.sublime-workspace
+
+# IDE - VSCode
+Sprite/.vscode/*
+!Sprite/.vscode/settings.json
+!Sprite/.vscode/tasks.json
+!Sprite/.vscode/launch.json
+!Sprite/.vscode/extensions.json
+Sprite/.history/*
+
+# misc
+Sprite/.sass-cache
+Sprite/connect.lock
+Sprite/coverage
+Sprite/libpeerconnection.log
+Sprite/npm-debug.log
+Sprite/yarn-error.log
+Sprite/testem.log
+Sprite/typings
+
+# System Files
+Sprite/.DS_Store
+Sprite/Thumbs.db
+
