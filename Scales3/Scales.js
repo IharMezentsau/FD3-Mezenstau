@@ -41,22 +41,24 @@ var ScalesStorageEngineArray = /** @class */ (function () {
 }());
 var ScalesStorageEngineLocalStorage = /** @class */ (function () {
     function ScalesStorageEngineLocalStorage() {
-        this.products = [];
-        this.date = JSON.stringify(new Date());
+        this.key = 'scalesStorageEngineLocalStorage';
+        var array = [];
+        localStorage.setItem(this.key, JSON.stringify(array));
     }
     ScalesStorageEngineLocalStorage.prototype.addItem = function (item) {
-        var productCount = this.getCount(), key = "product" + this.date + "_" + productCount;
-        localStorage[key] = JSON.stringify(item);
-        this.products.push(key);
+        var arrayStorage = JSON.parse(localStorage[this.key]);
+        arrayStorage.push(item);
+        localStorage[this.key] = JSON.stringify(arrayStorage);
     };
     ;
     ScalesStorageEngineLocalStorage.prototype.getItem = function (index) {
-        var product = JSON.parse(localStorage[this.products[index]]);
+        var product = JSON.parse(localStorage[this.key])[index];
         return new Product(product.name, product.scale);
     };
     ;
     ScalesStorageEngineLocalStorage.prototype.getCount = function () {
-        return this.products.length;
+        var arrayStorage = JSON.parse(localStorage[this.key]);
+        return arrayStorage.length;
     };
     ;
     return ScalesStorageEngineLocalStorage;
