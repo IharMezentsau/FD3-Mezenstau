@@ -2,15 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { SpriteComponent } from './sprite.component';
+import { MainComponent } from "./main.component";
 
 @NgModule({
   declarations: [
-    SpriteComponent
+    MainComponent, SpriteComponent
   ],
   imports: [
     BrowserModule
   ],
   providers: [],
-  bootstrap: [SpriteComponent]
+  bootstrap: [MainComponent]
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
-<div [style.height.px]="getHeight()"
-     [style.width.px]="getWidth()"
-     [style.backgroundImage]="'url(' + getSpriteUrl() + ')'"
-     [style.backgroundPosition]="getOffsetX() + 'px ' + getOffsetY() + 'px'"
-     (click)="mouseClick()"
+<div [style.height.px]="height"
+     [style.width.px]="width"
+     [style.backgroundImage]="'url(' + url + ')'"
+     [style.backgroundPosition]="offsetX + 'px ' + offsetY + 'px'"
+     (click)="onClickEvent($event)"
 >
 </div>
 

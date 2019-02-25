@@ -1,43 +1,34 @@
-import { Component } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   //moduleId: module.id,
-  selector: "sprite",
-  templateUrl: "sprite.component.html",
-  styleUrls: ["sprite.component.css"]
+  selector: 'sprite',
+  templateUrl: 'sprite.component.html',
+  styleUrls: ['sprite.component.css']
 })
-
 export class SpriteComponent {
 
-  private spriteUrl: string = "http://fe.it-academy.by/Examples/cards2.png";
-  private offsetX: number = 0;
-  private offsetY: number = 0;
-  private width: number = 144;
-  private height: number = 194;
+  @Input("url")
+  public url: string;
 
-  getSpriteUrl(): string {
-    return this.spriteUrl;
+  @Input("offset-x")
+  public offsetX: number;
+
+  @Input("offset-y")
+  public offsetY: number;
+
+  @Input("width")
+  public width: number;
+
+  @Input("height")
+  public height: number;
+
+  onClickEvent(e): void {
+    console.log(e);
+    this.cardChangeEE.emit();
   }
 
-  getOffsetX(): number {
-    return this.offsetX;
-  }
-
-  getOffsetY(): number {
-    return this.offsetY;
-  }
-
-  getWidth(): number {
-    return this.width;
-  }
-
-  getHeight(): number {
-    return this.height;
-  }
-
-  mouseClick():void {
-    this.offsetX -= this.getWidth();
-    this.offsetY -= this.getHeight()
-  }
+  @Output("cardOutput")
+  private cardChangeEE = new EventEmitter<object>();
 
 }
