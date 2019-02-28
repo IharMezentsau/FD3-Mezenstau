@@ -51,3 +51,47 @@ Sprite/typings
 Sprite/.DS_Store
 Sprite/Thumbs.db
 
+
+
+
+Numword/dist
+Numword/tmp
+Numword/out-tsc
+
+# dependencies
+Numword/node_modules
+
+# profiling files
+Numword/chrome-profiler-events.json
+Numword/speed-measure-plugin.json
+
+# IDEs and editors
+Numword/.idea
+Numword/.project
+Numword/.classpath
+Numword/.c9/
+Numword/*.launch
+Numword/.settings/
+Numword/*.sublime-workspace
+
+# IDE - VSCode
+Numword/.vscode/*
+!Numword/.vscode/settings.json
+!Numword/.vscode/tasks.json
+!Numword/.vscode/launch.json
+!Numword/.vscode/extensions.json
+Numword/.history/*
+
+# misc
+Numword/.sass-cache
+Numword/connect.lock
+Numword/coverage
+Numword/libpeerconnection.log
+Numword/npm-debug.log
+Numword/yarn-error.log
+Numword/testem.log
+Numword/typings
+
+# System Files
+Numword/.DS_Store
+Numword/Thumbs.db
