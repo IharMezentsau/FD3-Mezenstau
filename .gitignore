@@ -137,3 +137,46 @@ Cinema/typings
 # System Files
 Cinema/.DS_Store
 Cinema/Thumbs.db
+
+
+SpriteBg /dist
+SpriteBg /tmp
+SpriteBg /out-tsc
+
+# dependencies
+SpriteBg /node_modules
+
+# profiling files
+SpriteBg /chrome-profiler-events.json
+SpriteBg /speed-measure-plugin.json
+
+# IDEs and editors
+SpriteBg /.idea
+SpriteBg /.project
+SpriteBg /.classpath
+SpriteBg /.c9/
+SpriteBg/*.launch
+SpriteBg/.settings/
+SpriteBg/*.sublime-workspace
+
+# IDE - VSCode
+SpriteBg/.vscode/*
+!SpriteBg/.vscode/settings.json
+!SpriteBg/.vscode/tasks.json
+!SpriteBg/.vscode/launch.json
+!SpriteBg/.vscode/extensions.json
+SpriteBg/.history/*
+
+# misc
+SpriteBg/.sass-cache
+SpriteBg/connect.lock
+SpriteBg/coverage
+SpriteBg/libpeerconnection.log
+SpriteBg/npm-debug.log
+SpriteBg/yarn-error.log
+SpriteBg/testem.log
+SpriteBg/typings
+
+# System Files
+SpriteBg/.DS_Store
+SpriteBg/Thumbs.db
