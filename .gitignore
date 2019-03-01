@@ -95,3 +95,45 @@ Numword/typings
 # System Files
 Numword/.DS_Store
 Numword/Thumbs.db
+
+Cinema/dist
+Cinema/tmp
+Cinema/out-tsc
+
+# dependencies
+Cinema/node_modules
+
+# profiling files
+Cinema/chrome-profiler-events.json
+Cinema/speed-measure-plugin.json
+
+# IDEs and editors
+Cinema/.idea
+Cinema/.project
+Cinema/.classpath
+Cinema/.c9/
+Cinema/*.launch
+Cinema/.settings/
+Cinema/*.sublime-workspace
+
+# IDE - VSCode
+Cinema/.vscode/*
+!Cinema/.vscode/settings.json
+!Cinema/.vscode/tasks.json
+!Cinema/.vscode/launch.json
+!Cinema/.vscode/extensions.json
+Cinema/.history/*
+
+# misc
+Cinema/.sass-cache
+Cinema/connect.lock
+Cinema/coverage
+Cinema/libpeerconnection.log
+Cinema/npm-debug.log
+Cinema/yarn-error.log
+Cinema/testem.log
+Cinema/typings
+
+# System Files
+Cinema/.DS_Store
+Cinema/Thumbs.db
